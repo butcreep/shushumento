@@ -1,6 +1,6 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import profileIcon from '../../assets/images/icons/img-user-default.png'
+import React from "react";
+import { Link } from "react-router-dom";
+import profileIcon from "assets/images/icons/img-user-default.png";
 
 const Navigation = () => {
   return (
@@ -10,7 +10,7 @@ const Navigation = () => {
         <img src={profileIcon} alt="" />
       </Link>
     </div>
-  )
-}
+  );
+};
 
-export default Navigation
+export default Navigation;

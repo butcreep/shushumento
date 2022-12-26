@@ -1,6 +1,5 @@
-import React from 'react'
-import { useParams } from 'react-router-dom'
-import DetailDefaultInfo from '../../components/DetailDefaultInfo'
+import React from "react";
+import DetailDefaultInfo from "components/DetailDefaultInfo";
 
 const CampDetail = () => {
   return (
@@ -29,7 +28,7 @@ const CampDetail = () => {
       </div>
       <div>endTime : startDate - today</div>
     </div>
-  )
-}
+  );
+};
 
-export default CampDetail
+export default CampDetail;

@@ -1,43 +1,33 @@
-import React from "react";
-import CampCard from "components/CampCard";
+import React, { useEffect, useState } from "react";
 import Navigation from "components/Navigation";
-import { ICamp } from "types/type";
-
-const camps: ICamp[] = [
-  {
-    id: 1,
-    title:
-      "작은 회사의 백엔드 개발자도 서버 과부화에 대응할 수 있는 DevOps 실무 기술",
-    status: "모집중",
-    field: "프로그래밍",
-    skill: "백앤드",
-    startDate: "1월 4일",
-  },
-  {
-    id: 2,
-    title: "기초부터 시작하는 AWS 인프라 구축과 운영 및 DevOps엔지니어링 실무",
-    status: "모집완료",
-    field: "업무생산성",
-    skill: "백앤드",
-    startDate: "1월 8일",
-  },
-  {
-    id: 3,
-    title: "정말 쉬운 피그마 기초 활용법부터 시작하는 UX∙UI 디자인 초급 실무",
-    status: "모집중",
-    field: "디자인",
-    skill: "백앤드",
-    startDate: "2월 4일",
-  },
-];
+import { getCampsType } from "apis/campApi";
+import { CampType, ICamp } from "types/type";
+import CampCard from "components/CampCard";
 
 const Home = () => {
+  const [popularCamps, setPopularCamps] = useState<ICamp[]>();
+  const [saleCamps, setSaleCamps] = useState<ICamp[]>();
+  console.log("유메이", popularCamps);
+  console.log("세일", saleCamps);
+
+  useEffect(() => {
+    fetchCamps("popular");
+    fetchCamps("sale");
+  }, []);
+
+  const fetchCamps = async (type: CampType) => {
+    console.log(type);
+    const camps = await getCampsType(type);
+    type === "popular" ? setPopularCamps(camps) : setSaleCamps(camps);
+  };
+
   return (
     <>
       <Navigation />
-      {camps.map((camp, index) => (
-        <CampCard key={index} camp={camp} />
-      ))}
+      {popularCamps &&
+        popularCamps.map((camp, index) => <CampCard key={index} camp={camp} />)}
+      {saleCamps &&
+        saleCamps.map((camp, index) => <CampCard key={index} camp={camp} />)}
     </>
   );
 };

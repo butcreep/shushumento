@@ -12,10 +12,19 @@ export interface ICamp {
 export interface ICampDetail {
   id: number;
   name: string;
+  tags: string[];
+  desc: string;
+  seat: string;
+  reviewMaterial: string[];
+  headerImage: string;
+  images: string[];
+  process: string;
+  type: CampType;
   status: string;
   field: string;
   skill: string;
   startDate: string;
-  process: string;
   thumbnail: string;
+  reviews: { content: string; reviewer: string }[];
+  faqs: { question: string; answer: string }[];
 }

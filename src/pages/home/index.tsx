@@ -10,8 +10,6 @@ import Footer from "components/Footer";
 const Home = () => {
   const [popularCamps, setPopularCamps] = useState<ICamp[]>();
   const [saleCamps, setSaleCamps] = useState<ICamp[]>();
-  console.log("유메이", popularCamps);
-  console.log("세일", saleCamps);
 
   useEffect(() => {
     fetchCamps("popular");

@@ -2,7 +2,7 @@ import axios from "axios";
 import { CampType } from "types/type";
 
 const baseURL = axios.create({
-  baseURL: "https://2f3e8928-b7bb-429b-b2da-b7022f928e09.mock.pstmn.io",
+  baseURL: process.env.REACT_APP_SERVER_URL,
 });
 
 export const getCampsType = async (type: CampType) => {
@@ -14,9 +14,9 @@ export const getCampsType = async (type: CampType) => {
     });
 };
 
-export const getCamp = async (campId: number) => {
+export const getCamp = async (id: number) => {
   return await baseURL
-    .get(`/camps/${campId}`)
+    .get(`/camps/${id}`)
     .then((response) => response.data.data)
     .catch((err) => {
       console.error(err);

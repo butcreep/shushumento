@@ -6,7 +6,7 @@ export default createGlobalStyle`
       box-sizing: border-box;
       list-style:none ;
       font-family: 'Noto Sans KR', sans-serif;
-      letter-spacing: -0.5px;
+      letter-spacing: -1px;
     }
     a{
         text-decoration: none;

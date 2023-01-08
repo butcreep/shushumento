@@ -7,6 +7,7 @@ import GlobalStyled from "styles/global";
 const App = () => {
   return (
     <>
+      {/* TODO: camp detail 컴포넌트에 key줘야 함 */}
       <GlobalStyled />
       <BrowserRouter>
         <Routes>

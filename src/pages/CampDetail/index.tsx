@@ -8,6 +8,13 @@ import { ICampDetail } from "types/type";
 const CampDetail = () => {
   const { campId } = useParams();
   const [campDetail, setCampDetail] = useState<ICampDetail>();
+  const [btnActive, setBtnActive] = useState<boolean>(true);
+  // TODO:e type 을 any로 하는게 맞는건가?
+  const campSubmit = (e: any) => {
+    setBtnActive((prev) => {
+      return !prev;
+    });
+  };
   useEffect(() => {
     fetchCamp(Number(campId));
   }, [campId]);
@@ -16,7 +23,6 @@ const CampDetail = () => {
     const camp = await getCamp(id);
     setCampDetail(camp);
   };
-  console.log(campDetail);
   if (campDetail) {
     return (
       <>
@@ -64,11 +70,23 @@ const CampDetail = () => {
                 </li>
               </ul>
               <div className="application-box">
+                <div className="application-tag">{campDetail.tags}</div>
                 <h1>{campDetail.name}</h1>
-                <div>{campDetail.tags}</div>
-                <div>{campDetail.desc}</div>
-                <div>{campDetail.seat}</div>
+                <div className="application-desc">{campDetail.desc}</div>
+                {/* <div>{campDetail.seat}</div>
                 <div>{campDetail.reviewMaterial}</div>
+                <div>{campDetail.process}</div>
+                <div>{campDetail.type}</div>
+                <div>{campDetail.status}</div>
+                <div>{campDetail.field}</div>
+                <div>{campDetail.skill}</div>
+                <div>{campDetail.startDate}</div> */}
+                <button
+                  className={`btn${btnActive ? "" : "-submit"}`}
+                  onClick={campSubmit}
+                >
+                  {btnActive ? "신청하기" : "신청완료"}
+                </button>
               </div>
             </div>
           </div>
@@ -79,13 +97,6 @@ const CampDetail = () => {
                   <img width="300" src={image} alt="캠프 설명" />
                 ))}
             </div>
-            <div>{campDetail.process}</div>
-            <div>{campDetail.type}</div>
-            <div>{campDetail.status}</div>
-            <div>{campDetail.field}</div>
-            <div>{campDetail.skill}</div>
-            <div>{campDetail.startDate}</div>
-            <div>{campDetail.thumbnail}</div>
           </div>
         </Container>
       </>
@@ -183,6 +194,45 @@ const Container = styled.div`
         padding: 24px;
         border-radius: 6px;
         margin-top: 40px;
+        box-shadow: 0 0 6px rgb(0 0 0 / 10%);
+        .application-tag {
+          font-size: 14px;
+          line-height: 20px;
+          font-weight: 400;
+          color: rgb(60, 65, 68);
+          margin-bottom: 8px;
+        }
+        h1 {
+          font-size: 18px;
+          line-height: 25px;
+          color: #000;
+          margin-bottom: 15px;
+          font-weight: 600;
+        }
+        .application-desc {
+          background-color: rgb(252, 252, 252);
+          padding: 8px;
+          margin-bottom: 24px;
+          font-size: 14px;
+          line-height: 20px;
+          text-align: center;
+        }
+
+        button {
+          width: 100%;
+          height: 48px;
+          padding: 0 14px;
+          min-width: 56px;
+          border-radius: 8px;
+          font-size: 16px;
+          line-height: 25px;
+          font-weight: 600;
+          color: #fff;
+          background-color: #009688;
+          &.btn-submit {
+            background-color: #004841;
+          }
+        }
       }
     }
   }

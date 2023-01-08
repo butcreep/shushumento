@@ -91,7 +91,7 @@ const CampDetail = () => {
       </>
     );
   } else {
-    return <div>로딩중</div>;
+    return null;
   }
 };
 
@@ -108,7 +108,7 @@ const Header = styled.div`
     line-height: 40px;
     color: #ffffff;
     font-weight: 600;
-    width: 487px;
+    width: 600px;
     margin-right: 30px;
   }
   img {

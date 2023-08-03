@@ -2,6 +2,7 @@ import axios from "axios";
 import { CampType } from "types/type";
 
 const baseURL = axios.create({
+  //env postman
   baseURL: process.env.REACT_APP_SERVER_URL,
 });
 

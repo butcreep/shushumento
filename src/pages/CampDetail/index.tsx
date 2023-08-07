@@ -1,14 +1,17 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { getCamp } from "apis/campApi";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import Navigation from "components/Navigation";
 import { ICampDetail } from "types/type";
+import { observer } from "mobx-react-lite";
+import CampStore from "stores/CampStore";
 
 const CampDetail = () => {
   const { campId } = useParams();
-  const [campDetail, setCampDetail] = useState<ICampDetail>();
+  // const [campDetail, setCampDetail] = useState<ICampDetail>();
   const [btnActive, setBtnActive] = useState<boolean>(true);
+  const campStore = useContext(CampStore);
   // TODO:e type 을 any로 하는게 맞는건가?
   const campSubmit = (e: any) => {
     setBtnActive((prev) => {
@@ -16,20 +19,21 @@ const CampDetail = () => {
     });
   };
   useEffect(() => {
-    fetchCamp(Number(campId));
+    // fetchCamp(Number(campId));
+    campStore.fetchCampById(Number(campId));
   }, [campId]);
-  const fetchCamp = async (id: number) => {
-    console.log(id);
-    const camp = await getCamp(id);
-    setCampDetail(camp);
-  };
-  if (campDetail) {
+  // const fetchCamp = async (id: number) => {
+  //   console.log(id);
+  //   const camp = await getCamp(id);
+  //   setCampDetail(camp);
+  // };
+  if (campStore.targetCamp) {
     return (
       <>
         <Navigation />
         <Header>
-          <h1>{campDetail.name}</h1>
-          <img src={campDetail.headerImage} alt="" />
+          <h1>{campStore.targetCamp.name}</h1>
+          <img src={campStore.targetCamp.headerImage} alt="" />
         </Header>
         <Container>
           <div className="middle_section">
@@ -70,17 +74,17 @@ const CampDetail = () => {
                 </li>
               </ul>
               <div className="application-box">
-                <div className="application-tag">{campDetail.tags}</div>
-                <h1>{campDetail.name}</h1>
-                <div className="application-desc">{campDetail.desc}</div>
-                {/* <div>{campDetail.seat}</div>
-                <div>{campDetail.reviewMaterial}</div>
-                <div>{campDetail.process}</div>
-                <div>{campDetail.type}</div>
-                <div>{campDetail.status}</div>
-                <div>{campDetail.field}</div>
-                <div>{campDetail.skill}</div>
-                <div>{campDetail.startDate}</div> */}
+                <div className="application-tag">{campStore.targetCamp.tags}</div>
+                <h1>{campStore.targetCamp.name}</h1>
+                <div className="application-desc">{campStore.targetCamp.desc}</div>
+                {/* <div>{campStore.targetCamp.seat}</div>
+                <div>{campStore.targetCamp.reviewMaterial}</div>
+                <div>{campStore.targetCamp.process}</div>
+                <div>{campStore.targetCamp.type}</div>
+                <div>{campStore.targetCamp.status}</div>
+                <div>{campStore.targetCamp.field}</div>
+                <div>{campStore.targetCamp.skill}</div>
+                <div>{campStore.targetCamp.startDate}</div> */}
                 <button
                   className={`btn${btnActive ? "" : "-submit"}`}
                   onClick={campSubmit}
@@ -92,8 +96,8 @@ const CampDetail = () => {
           </div>
           <div className="bottom_section">
             <div>
-              {campDetail.images &&
-                campDetail.images.map((image) => (
+              {campStore.targetCamp.images &&
+                campStore.targetCamp.images.map((image) => (
                   <img width="300" src={image} alt="캠프 설명" />
                 ))}
             </div>
@@ -104,9 +108,10 @@ const CampDetail = () => {
   } else {
     return null;
   }
+
 };
 
-export default CampDetail;
+export default observer(CampDetail);
 const Header = styled.div`
   background-color: #00bcd4;
   display: flex;

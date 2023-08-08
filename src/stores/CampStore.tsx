@@ -11,7 +11,6 @@ class CampsStore {
   constructor() {
     makeObservable(this);
   }
-
   fetchCampsPopular = async () => {
     const data = await getCampsType("popular");
     this.campPopular = data;

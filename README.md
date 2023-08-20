@@ -8,7 +8,7 @@ Demo는 [Demo 링크](https://d3e916ikhteqe8.cloudfront.net/)에서 확인할 �
 # Milestone
 
 |순서|기술|TODO|
-|------|---|---|--|
+|------|---|---|
 |1|![Git](https://img.shields.io/badge/-Git-05122A?style=flat&logo=git) ![GitHub](https://img.shields.io/badge/-GitHub-05122A?style=flat&logo=github)| ✔️ React 프로젝트 셋팅<br/> ✔️ github 셋팅(pages, actions, projects)|
 |2|![React](https://img.shields.io/badge/-React-05122A?style=flat&logo=react) ![Typescript](https://img.shields.io/badge/-Typescript-05122A?style=flat&logo=typescript)|✔️ interface 구현 <br/>✔️ 라우팅 적용 |
 |3|`스타일링`,`styled-components`,`media query`|✔️ UI 스타일링 적용 <br/>✔️ 반응형 웹 구현 <br/>✔ 스와이프 적용|
